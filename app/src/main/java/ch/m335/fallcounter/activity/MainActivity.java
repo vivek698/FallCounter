@@ -1,4 +1,4 @@
-package ch.m335.fallcounter;
+package ch.m335.fallcounter.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 
 import java.util.Calendar;
+
+import ch.m335.fallcounter.R;
 
 public class MainActivity extends AppCompatActivity {
     EditText editTextDate1;
