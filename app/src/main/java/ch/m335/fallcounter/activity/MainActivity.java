@@ -49,5 +49,5 @@ public class MainActivity extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-
+//https://stackoverflow.com/questions/4848490/android-how-to-approach-fall-detection-algorithm/44848490#44848490
 }
