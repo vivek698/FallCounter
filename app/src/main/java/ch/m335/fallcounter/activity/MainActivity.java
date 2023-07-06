@@ -3,14 +3,16 @@ package ch.m335.fallcounter.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
 import java.util.Calendar;
 
 import ch.m335.fallcounter.R;
+import ch.m335.fallcounter.services.DataHandler;
 
 public class MainActivity extends AppCompatActivity {
     EditText editTextDate1;
@@ -21,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        DataHandler dataHandler = new DataHandler(getSharedPreferences("FallCounter", Context.MODE_PRIVATE));
 
         editTextDate1 = findViewById(R.id.startDate);
         editTextDate2 = findViewById(R.id.endDate);

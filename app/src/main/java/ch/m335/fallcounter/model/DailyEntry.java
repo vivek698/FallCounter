@@ -1,12 +1,12 @@
 package ch.m335.fallcounter.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class DailyEntry {
     private int counter;
-    private Date date;
+    private LocalDate date;
 
-    public DailyEntry(int counter, Date date) {
+    public DailyEntry(int counter, LocalDate date) {
         this.counter = counter;
         this.date = date;
     }
@@ -19,11 +19,11 @@ public class DailyEntry {
         this.counter = counter;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 }
