@@ -11,10 +11,19 @@ import ch.m335.fallcounter.model.DailyEntry;
 
 
 public class DataHandler {
+    private static DataHandler dataHandler;
     SharedPreferences sharedPreferences;
 
-    public DataHandler(SharedPreferences sharedPreferences) {
-        this.sharedPreferences= sharedPreferences;
+    public DataHandler(SharedPreferences sharedP) {
+        sharedPreferences = sharedP;
+    }
+
+    public static DataHandler getDataHandler(){
+        return dataHandler;
+    }
+
+    public DataHandler getDataHandler(SharedPreferences sharedP){
+        return dataHandler;
     }
 
     public void incrementCounter(){
