@@ -16,6 +16,7 @@ import android.widget.TextView;
 import java.util.Calendar;
 
 import ch.m335.fallcounter.R;
+import ch.m335.fallcounter.services.CalculatorService;
 import ch.m335.fallcounter.services.DataHandler;
 
 public class MainActivity extends AppCompatActivity {
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (magnitude < threshold) {
                     //falling
+                    new CalculatorService().incrementCounter();
                 }
 
             }

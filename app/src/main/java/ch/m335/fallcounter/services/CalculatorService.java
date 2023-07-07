@@ -30,4 +30,8 @@ public class CalculatorService {
         }
         return sum;
     }
+
+    public void incrementCounter(){
+        dataHandler.incrementCounter();
+    }
 }
