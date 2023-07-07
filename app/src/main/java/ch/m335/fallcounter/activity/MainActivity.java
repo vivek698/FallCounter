@@ -10,6 +10,8 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     TextView messageTextView;
     EditText editTextDate1;
     EditText editTextDate2;
+    Button submitButton;
     Calendar calendar = Calendar.getInstance();
 
     private SensorManager sensorManager;
@@ -69,6 +72,22 @@ public class MainActivity extends AppCompatActivity {
         editTextDate2.setText(today.toString());
         //date textfields end
 
+        // button start
+        submitButton = findViewById(R.id.submit);
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LocalDate date1 = LocalDate.parse(editTextDate1.getText().toString());
+                LocalDate date2 = LocalDate.parse(editTextDate2.getText().toString());
+                int sum = calculatorService.getSum(date1,date2);
+                messageTextView = findViewById(R.id.messageTextView);
+
+                String newText = messageTextView.getText().toString().replace("\\d+", String.valueOf(sum));
+                messageTextView.setText(newText);
+            }
+        });
+        // button end
+
         //sensor config start
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -87,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
 
         sensorManager.registerListener(sensorEventListener, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
         //sensor config end
+
     }
 
     private void showDatePickerDialog(EditText editTextDate) {
