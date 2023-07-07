@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -13,6 +14,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 
 import ch.m335.fallcounter.R;
@@ -34,7 +36,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DataHandler dataHandler = new DataHandler(getSharedPreferences("FallCounter", Context.MODE_PRIVATE));
+        SharedPreferences sharedPreferences = getSharedPreferences("FallCounter", Context.MODE_PRIVATE);
+
+        if(sharedPreferences==null){
+            SharedPreferences preferences = getSharedPreferences("FallCounter", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.apply();
+        }
+        DataHandler.setSharedPreference(sharedPreferences);
+
+        CalculatorService calculatorService = new CalculatorService();
+
+        LocalDate today = LocalDate.now();
+
+        int sum = calculatorService.getSum(today,today);
 
         editTextDate1 = findViewById(R.id.startDate);
         editTextDate2 = findViewById(R.id.endDate);
@@ -42,8 +57,8 @@ public class MainActivity extends AppCompatActivity {
         editTextDate1.setOnClickListener(v -> showDatePickerDialog(editTextDate1));
         editTextDate2.setOnClickListener(v -> showDatePickerDialog(editTextDate2));
 
-
-
+        editTextDate1.setText(today.toString());
+        editTextDate2.setText(today.toString());
 
         //sensor
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -65,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (magnitude < threshold) {
                     //falling
-                    new CalculatorService().incrementCounter();
+                    calculatorService .incrementCounter();
                 }
 
             }

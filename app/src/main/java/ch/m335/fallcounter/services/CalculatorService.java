@@ -6,13 +6,10 @@ import java.util.List;
 import ch.m335.fallcounter.model.DailyEntry;
 
 public class CalculatorService {
-    DataHandler dataHandler;
-    public CalculatorService() {
-        dataHandler = DataHandler.getDataHandler();
-    }
+    public CalculatorService() {}
 
     public int getSum(LocalDate date1, LocalDate date2){
-        List<DailyEntry> entries = dataHandler.readAllEntries();
+        List<DailyEntry> entries = DataHandler.readAllEntries();
         int sum=0;
         int indexFirst=0;
         int indexLast=entries.size();
@@ -32,6 +29,6 @@ public class CalculatorService {
     }
 
     public void incrementCounter(){
-        dataHandler.incrementCounter();
+        DataHandler.incrementCounter();
     }
 }

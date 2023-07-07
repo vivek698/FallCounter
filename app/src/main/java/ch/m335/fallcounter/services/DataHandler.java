@@ -11,22 +11,14 @@ import ch.m335.fallcounter.model.DailyEntry;
 
 
 public class DataHandler {
-    private static DataHandler dataHandler;
-    SharedPreferences sharedPreferences;
+    static SharedPreferences sharedPreferences;
 
-    public DataHandler(SharedPreferences sharedP) {
+    public static void setSharedPreference(SharedPreferences sharedP) {
         sharedPreferences = sharedP;
     }
 
-    public static DataHandler getDataHandler(){
-        return dataHandler;
-    }
 
-    public DataHandler getDataHandler(SharedPreferences sharedP){
-        return dataHandler;
-    }
-
-    public void incrementCounter(){
+    public static void incrementCounter(){
         String date = LocalDate.now().toString();
         SharedPreferences.Editor editor = sharedPreferences.edit();
         if (!sharedPreferences.contains(date)){
@@ -39,7 +31,7 @@ public class DataHandler {
         }
     }
 
-    public List<DailyEntry> readAllEntries(){
+    public static List<DailyEntry> readAllEntries(){
         Map<String, ?> allData= sharedPreferences.getAll();
         List<DailyEntry> entryList = new ArrayList();
 
