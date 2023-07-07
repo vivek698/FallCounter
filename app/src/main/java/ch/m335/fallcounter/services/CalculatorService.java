@@ -12,7 +12,8 @@ public class CalculatorService {
         List<DailyEntry> entries = DataHandler.readAllEntries();
         int sum=0;
         int indexFirst=0;
-        int indexLast=entries.size();
+        int indexLast=entries.size()-1;
+
         for (int i = 0; i < entries.size(); i++) {
             if (date1.equals(entries.get(i).getDate())){
                 indexFirst=i;
