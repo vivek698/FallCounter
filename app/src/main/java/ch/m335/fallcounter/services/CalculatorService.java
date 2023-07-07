@@ -22,7 +22,7 @@ public class CalculatorService {
             }
         }
 
-        for (int i = indexLast; i < indexLast; i++) {
+        for (int i = indexFirst; i <= indexLast; i++) {
             sum+=entries.get(i).getCounter();
         }
         return sum;

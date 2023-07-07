@@ -22,6 +22,7 @@ import ch.m335.fallcounter.services.CalculatorService;
 import ch.m335.fallcounter.services.DataHandler;
 
 public class MainActivity extends AppCompatActivity {
+    TextView messageTextView;
     EditText editTextDate1;
     EditText editTextDate2;
     Calendar calendar = Calendar.getInstance();
@@ -37,20 +38,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         SharedPreferences sharedPreferences = getSharedPreferences("FallCounter", Context.MODE_PRIVATE);
+        LocalDate today = LocalDate.now();
 
         if(sharedPreferences==null){
             SharedPreferences preferences = getSharedPreferences("FallCounter", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = preferences.edit();
             editor.apply();
         }
+
         DataHandler.setSharedPreference(sharedPreferences);
 
         CalculatorService calculatorService = new CalculatorService();
 
-        LocalDate today = LocalDate.now();
-
         int sum = calculatorService.getSum(today,today);
+        messageTextView = findViewById(R.id.messageTextView);
 
+        String newText = (String) messageTextView.getText().toString().replace("_", String.valueOf(sum));
+        messageTextView.setText(newText);
+
+        //date textfields start
         editTextDate1 = findViewById(R.id.startDate);
         editTextDate2 = findViewById(R.id.endDate);
 
@@ -59,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
         editTextDate1.setText(today.toString());
         editTextDate2.setText(today.toString());
+        //date textfields end
 
         //sensor
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -97,8 +104,8 @@ public class MainActivity extends AppCompatActivity {
                 this,
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        editTextDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                    public void onDateSet(DatePicker view, int year, int month, int day) {
+                        editTextDate.setText(day + "/" + (month + 1) + "/" + year);
                     }
                 },
                 calendar.get(Calendar.YEAR),
