@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">FallCounter</string>
+    <string name="submit_text">zählen</string>
+    <string name="start_date_text">Select Date 1</string>
+    <string name="end_date_text">Select Date 2</string>
+    <string name="message_text_view_text">Das Handy ist _ mal runter gefallen.</string>
+    <string name="text_view_text">-</string>
+    <string name="title_text_view_text">Fall Counter</string>
 </resources>
